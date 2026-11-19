@@ -83,13 +83,6 @@ output
   }
 }
 
-Log in
-Sign up for free
-image-1024.jpg
-give code and output
-
-Worked for 12s
-Below is the complete MongoDB code and expected output for your Movie Catalogue practical, covering all 7 tasks.
 
 MongoDB Practical: Movie Catalogue – Index Order, Compound Index and Multikey Index
 Step 1: Create database and insert documents
@@ -204,13 +197,6 @@ executionStats.nReturned : 2
 executionStats.totalDocsExamined : 8
 
 
-Log in
-Sign up for free
-image-1024.jpg
-give code and output
-
-Worked for 12s
-Below is the complete MongoDB code and expected output for your Movie Catalogue practical, covering all 7 tasks.
 
 MongoDB Practical: Movie Catalogue – Index Order, Compound Index and Multikey Index
 Step 1: Create database and insert documents
