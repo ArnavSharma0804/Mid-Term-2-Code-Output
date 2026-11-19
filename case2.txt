@@ -1,0 +1,144 @@
+tep 1: Create database and insert documents
+MongoDB Shell Code:
+
+javascript
+use ticketDB
+
+db.bookings.insertMany([
+  {
+    _id: 1,
+    passenger: "Anand",
+    route: "Chennai-Madurai",
+    seats: 2
+  },
+  {
+    _id: 2,
+    passenger: "Bhuvana",
+    route: "Chennai-Coimbatore",
+    seats: 1
+  },
+  {
+    _id: 3,
+    passenger: "Chandru",
+    route: "Madurai-Trichy",
+    seats: 3
+  },
+  {
+    _id: 4,
+    passenger: "Divya",
+    route: "Salem-Chennai",
+    seats: 1
+  },
+  {
+    _id: 5,
+    passenger: "Elango",
+    route: "Chennai-Trichy",
+    seats: 2
+  }
+])
+Output:
+
+javascript
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 1,
+    '1': 2,
+    '2': 3,
+    '3': 4,
+    '4': 5
+  }
+}
+
+Task 1: Take a full backup of the replica set
+Run this command in Windows CMD or PowerShell, not MongoDB Shell.
+
+Code:
+
+
+bash
+mongodump --uri="mongodb://localhost:27017/?replicaSet=rs0&readPreference=secondary" --oplog --out="C:\backups\ticket_full"
+Output (example):
+
+
+text
+writing ticketDB.bookings to
+C:\backups\ticket_full\ticketDB\bookings.bson
+
+done dumping ticketDB.bookings (5 documents)
+
+writing captured oplog to
+C:\backups\ticket_full\oplog.bson
+
+done dumping oplog
+
+Task 2: Verify the backup files
+Open Windows CMD and execute:
+
+Code:
+
+
+cmd
+dir C:\backups\ticket_full\ticketDB
+Output:
+
+
+text
+Directory of C:\backups\ticket_full\ticketDB
+
+bookings.bson
+bookings.metadata.json
+
+Task 3: Simulate an accidental disaster
+Drop the bookings collection to simulate accidental deletion.
+
+Code:
+
+
+javascript
+use ticketDB
+
+db.bookings.drop()
+Output:
+
+
+javascript
+true
+
+Task 4: Restore the collection from backup
+Run this command in Windows CMD or PowerShell.
+
+Code:
+
+
+bash
+mongorestore --nsInclude="ticketDB.bookings" "C:\backups\ticket_full"
+Output:
+
+
+text
+restoring ticketDB.bookings from
+C:\backups\ticket_full\ticketDB\bookings.bson
+
+finished restoring ticketDB.bookings
+(5 documents, 0 failures)
+
+5 document(s) restored successfully.
+0 document(s) failed to restore.
+
+Task 5: Verify the restored data
+Open MongoDB Shell.
+
+Code:
+
+
+javascript
+use ticketDB
+
+db.bookings.countDocuments()
+Output:
+
+
+javascript
+5
+

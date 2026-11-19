@@ -1,0 +1,406 @@
+use movieDB
+
+db.movies.insertMany([
+  {
+    _id: 1,
+    title: "Silent River",
+    genre: "Drama",
+    rating: 8.4,
+    year: 2019,
+    cast: ["Asha", "Ravi"]
+  },
+  {
+    _id: 2,
+    title: "Rapid Chase",
+    genre: "Action",
+    rating: 7.2,
+    year: 2020,
+    cast: ["Vikram", "Asha"]
+  },
+  {
+    _id: 3,
+    title: "Lost Letters",
+    genre: "Drama",
+    rating: 7.1,
+    year: 2018,
+    cast: ["Meera", "Ravi"]
+  },
+  {
+    _id: 4,
+    title: "Iron Gate",
+    genre: "Action",
+    rating: 8.1,
+    year: 2021,
+    cast: ["Vikram", "Karan"]
+  },
+  {
+    _id: 5,
+    title: "Morning Song",
+    genre: "Drama",
+    rating: 8.8,
+    year: 2022,
+    cast: ["Meera", "Asha"]
+  },
+  {
+    _id: 6,
+    title: "Laugh Lane",
+    genre: "Comedy",
+    rating: 6.9,
+    year: 2017,
+    cast: ["Karan", "Meera"]
+  },
+  {
+    _id: 7,
+    title: "Night Heist",
+    genre: "Action",
+    rating: 6.5,
+    year: 2019,
+    cast: ["Vikram", "Ravi"]
+  },
+  {
+    _id: 8,
+    title: "Paper Boats",
+    genre: "Drama",
+    rating: 7.9,
+    year: 2021,
+    cast: ["Asha", "Karan"]
+  }
+])
+
+
+output
+{
+  acknowledged: true,
+  insertedIds: {
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8
+  }
+}
+
+Log in
+Sign up for free
+image-1024.jpg
+give code and output
+
+Worked for 12s
+Below is the complete MongoDB code and expected output for your Movie Catalogue practical, covering all 7 tasks.
+
+MongoDB Practical: Movie Catalogue – Index Order, Compound Index and Multikey Index
+Step 1: Create database and insert documents
+Code:
+
+
+javascript
+use movieDB
+
+db.movies.insertMany([
+  {
+    _id: 1,
+    title: "Silent River",
+    genre: "Drama",
+    rating: 8.4,
+    year: 2019,
+    cast: ["Asha", "Ravi"]
+  },
+  {
+    _id: 2,
+    title: "Rapid Chase",
+    genre: "Action",
+    rating: 7.2,
+    year: 2020,
+    cast: ["Vikram", "Asha"]
+  },
+  {
+    _id: 3,
+    title: "Lost Letters",
+    genre: "Drama",
+    rating: 7.1,
+    year: 2018,
+    cast: ["Meera", "Ravi"]
+  },
+  {
+    _id: 4,
+    title: "Iron Gate",
+    genre: "Action",
+    rating: 8.1,
+    year: 2021,
+    cast: ["Vikram", "Karan"]
+  },
+  {
+    _id: 5,
+    title: "Morning Song",
+    genre: "Drama",
+    rating: 8.8,
+    year: 2022,
+    cast: ["Meera", "Asha"]
+  },
+  {
+    _id: 6,
+    title: "Laugh Lane",
+    genre: "Comedy",
+    rating: 6.9,
+    year: 2017,
+    cast: ["Karan", "Meera"]
+  },
+  {
+    _id: 7,
+    title: "Night Heist",
+    genre: "Action",
+    rating: 6.5,
+    year: 2019,
+    cast: ["Vikram", "Ravi"]
+  },
+  {
+    _id: 8,
+    title: "Paper Boats",
+    genre: "Drama",
+    rating: 7.9,
+    year: 2021,
+    cast: ["Asha", "Karan"]
+  }
+])
+Output:
+
+
+javascript
+{
+  acknowledged: true,
+  insertedIds: {
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8
+  }
+}
+Task 1: Explain without an index
+Find Drama movies with a rating of 8 or above.
+
+Code:
+
+
+javascript
+db.movies.find({
+  genre: "Drama",
+  rating: { $gte: 8 }
+}).explain("executionStats")
+Output (important fields):
+
+
+javascript
+winningPlan.stage : "COLLSCAN"
+
+executionStats.nReturned : 2
+
+executionStats.totalDocsExamined : 8
+
+
+Log in
+Sign up for free
+image-1024.jpg
+give code and output
+
+Worked for 12s
+Below is the complete MongoDB code and expected output for your Movie Catalogue practical, covering all 7 tasks.
+
+MongoDB Practical: Movie Catalogue – Index Order, Compound Index and Multikey Index
+Step 1: Create database and insert documents
+Code:
+
+
+javascript
+use movieDB
+
+db.movies.insertMany([
+  {
+    _id: 1,
+    title: "Silent River",
+    genre: "Drama",
+    rating: 8.4,
+    year: 2019,
+    cast: ["Asha", "Ravi"]
+  },
+  {
+    _id: 2,
+    title: "Rapid Chase",
+    genre: "Action",
+    rating: 7.2,
+    year: 2020,
+    cast: ["Vikram", "Asha"]
+  },
+  {
+    _id: 3,
+    title: "Lost Letters",
+    genre: "Drama",
+    rating: 7.1,
+    year: 2018,
+    cast: ["Meera", "Ravi"]
+  },
+  {
+    _id: 4,
+    title: "Iron Gate",
+    genre: "Action",
+    rating: 8.1,
+    year: 2021,
+    cast: ["Vikram", "Karan"]
+  },
+  {
+    _id: 5,
+    title: "Morning Song",
+    genre: "Drama",
+    rating: 8.8,
+    year: 2022,
+    cast: ["Meera", "Asha"]
+  },
+  {
+    _id: 6,
+    title: "Laugh Lane",
+    genre: "Comedy",
+    rating: 6.9,
+    year: 2017,
+    cast: ["Karan", "Meera"]
+  },
+  {
+    _id: 7,
+    title: "Night Heist",
+    genre: "Action",
+    rating: 6.5,
+    year: 2019,
+    cast: ["Vikram", "Ravi"]
+  },
+  {
+    _id: 8,
+    title: "Paper Boats",
+    genre: "Drama",
+    rating: 7.9,
+    year: 2021,
+    cast: ["Asha", "Karan"]
+  }
+])
+Output:
+
+
+javascript
+{
+  acknowledged: true,
+  insertedIds: {
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8
+  }
+}
+Task 1: Explain without an index
+Find Drama movies with a rating of 8 or above.
+
+Code:
+
+
+javascript
+db.movies.find({
+  genre: "Drama",
+  rating: { $gte: 8 }
+}).explain("executionStats")
+Output (important fields):
+
+
+javascript
+winningPlan.stage : "COLLSCAN"
+
+executionStats.nReturned : 2
+
+executionStats.totalDocsExamined : 8
+Explanation:
+
+COLLSCAN means Collection Scan.
+
+MongoDB examines all 8 documents.
+
+Only 2 movies match the condition.
+
+Without an index, the query is slower because the entire collection is scanned.
+
+Matching movies:
+
+
+javascript
+[
+  { title: "Silent River", rating: 8.4 },
+  { title: "Morning Song", rating: 8.8 }
+]
+Task 2: Create a compound index in the right order
+Create an index on genre first and rating second.
+
+Code:
+
+
+javascript
+db.movies.createIndex(
+  { genre: 1, rating: -1 }
+)
+Output:
+
+
+javascript
+genre_1_rating_-1
+
+Task 3: Compare with a poorly ordered index
+Create another compound index with rating first and genre second.
+
+Code:
+
+
+javascript
+db.movies.createIndex(
+  { rating: -1, genre: 1 }
+)
+Output:
+
+
+javascript
+rating_-1_genre_1
+
+Task 4: Drop the poorly ordered index
+Code:
+
+
+javascript
+db.movies.dropIndex("rating_-1_genre_1")
+Output:
+
+
+javascript
+{
+  nIndexesWas: 3,
+  ok: 1
+}
+
+Task 5: Create a multikey index
+Create an index on the cast array field.
+
+Code:
+
+
+javascript
+db.movies.createIndex(
+  { cast: 1 },
+  { name: "cast_1" }
+)
+Output:
+
+
+javascript
+cast_1
